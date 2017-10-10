@@ -18,6 +18,7 @@ type Props = {
   borderless?: boolean,
   pressColor?: string,
   pressOpacity?: number,
+  useForeground: boolean,
   children?: React.Element<any>,
   style?: Style,
 };
@@ -37,11 +38,13 @@ export default class TouchableItem extends PureComponent<
     borderless: PropTypes.bool,
     pressColor: PropTypes.string,
     pressOpacity: PropTypes.number,
+    useForeground: PropTypes.bool,
     children: PropTypes.node.isRequired,
   };
 
   static defaultProps = {
     pressColor: 'rgba(255, 255, 255, .4)',
+    useForeground: false
   };
 
   _handlePress = () => {
@@ -50,13 +53,14 @@ export default class TouchableItem extends PureComponent<
 
   render() {
     // eslint-disable-next-line react/prop-types
-    const { style, pressOpacity, pressColor, borderless, ...rest } = this.props;
+    const { style, pressOpacity, pressColor, useForeground, borderless, ...rest } = this.props;
 
     if (Platform.OS === 'android' && Platform.Version >= LOLLIPOP) {
       return (
         <TouchableNativeFeedback
           {...rest}
           onPress={this._handlePress}
+          useForeground={useForeground}
           background={TouchableNativeFeedback.Ripple(pressColor, borderless)}
         >
           <View style={style}>

@@ -461,6 +461,7 @@ export default class TabBar<T: Route<*>> extends PureComponent<
                   accessibilityTraits="button"
                   pressColor={this.props.pressColor}
                   pressOpacity={this.props.pressOpacity}
+                  useForeground={true}
                   delayPressIn={0}
                   onPress={() => {
                     // eslint-disable-line react/jsx-no-bind
